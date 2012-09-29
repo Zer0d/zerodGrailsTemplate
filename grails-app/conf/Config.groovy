@@ -81,12 +81,14 @@ log4j = {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
 
-    appender new DailyRollingFileAppender(name:"stdout",
-            layout: pattern(conversionPattern:'%d{ISO8601}|[%t]|%-5p |%c{1}| %x | %m%n'),
-            fileName:"${logDir}/log.log")
-    appender new DailyRollingFileAppender(name:"stacktrace",
-            layout: pattern(conversionPattern:'%d{ISO8601}|[%t]|%-5p |%c{1}| %x | %m%n'),
-            fileName:"${logDir}/stacktrace.log")
+    if (Environment.getCurrent() == Environment.PRODUCTION){
+        appender new DailyRollingFileAppender(name:"stdout",
+                layout: pattern(conversionPattern:'%d{ISO8601}|[%t]|%-5p |%c{1}| %x | %m%n'),
+                fileName:"${logDir}/log.log")
+        appender new DailyRollingFileAppender(name:"stacktrace",
+                layout: pattern(conversionPattern:'%d{ISO8601}|[%t]|%-5p |%c{1}| %x | %m%n'),
+                fileName:"${logDir}/stacktrace.log")
+    }
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
