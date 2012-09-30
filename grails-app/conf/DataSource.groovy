@@ -28,7 +28,7 @@ environments {
     }
     production {
         dataSource {
-
+           ${productionDataSource}
         }
     }
 }
