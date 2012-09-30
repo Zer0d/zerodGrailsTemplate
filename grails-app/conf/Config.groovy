@@ -89,6 +89,7 @@ log4j = {
                 layout: pattern(conversionPattern:'%d{ISO8601}|[%t]|%-5p |%c{1}| %x | %m%n'),
                 fileName:"${logDir}/stacktrace.log")
     }
+    error stdout: "StackTrace"
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
@@ -101,9 +102,15 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+    root {
+        if(Environment.current == Environment.PRODUCTION) {
+            info 'stdout'
+            additivity = true
+        }
+    }
 }
 
-error stdout: "StackTrace"
+
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.yourapp.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.yourapp.UserRole'
