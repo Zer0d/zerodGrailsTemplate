@@ -1,5 +1,5 @@
 import org.apache.log4j.DailyRollingFileAppender
-
+import grails.util.Environment
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -81,7 +81,7 @@ log4j = {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
 
-    if (Environment.getCurrent() == Environment.PRODUCTION){
+    if (Environment.current == Environment.PRODUCTION){
         appender new DailyRollingFileAppender(name:"stdout",
                 layout: pattern(conversionPattern:'%d{ISO8601}|[%t]|%-5p |%c{1}| %x | %m%n'),
                 fileName:"${logDir}/log.log")
@@ -103,6 +103,7 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
+error stdout: "StackTrace"
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.yourapp.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.yourapp.UserRole'
