@@ -61,6 +61,10 @@ grails.exceptionresolver.params.exclude = ['password']
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
 
+coverage {
+    xml = true
+}
+
 environments {
     development {
         grails.logging.jul.usebridge = false
@@ -88,6 +92,11 @@ log4j = {
         appender new DailyRollingFileAppender(name:"stacktrace",
                 layout: pattern(conversionPattern:'%d{ISO8601}|[%t]|%-5p |%c{1}| %x | %m%n'),
                 fileName:"${logDir}/stacktrace.log")
+    }
+    else{
+        appenders {
+            console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+        }
     }
     error stdout: "StackTrace"
 

@@ -8,6 +8,10 @@ grails.project.war.file = "target/${appName}.war"
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.tomcat.jvmArgs= ["-Xms256m",  "-Xmx1024m", "-XX:PermSize=512m", "-XX:MaxPermSize=512m"]
 
+coverage {
+    xml = true
+}
+
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
